@@ -9,8 +9,27 @@
 <body>
 
 <?php
-$url = "https://www.cartegrisefactory.fr/api/getPrice";
 
+	$demande = $_POST['demande'];
+	$type = $_POST['type'];
+	$departement = $_POST['departement'];
+	$modele = $_POST['modele'];
+	$energie = $_POST['energie'];
+	$cv = $_POST['cv'];
+	$immatriculation = $_POST['immatriculation'];
+	$circulation = $_POST['circulation'];
+	$co2 = $_POST['co2'];
+	$ptac = $_POST['ptac'];
+	$ci = $_POST['ci'];
+	$dc = $_POST['dc'];
+	$cgr = $_POST['cgr'];
+	$cgv = $_POST['cgv'];
+	$pi = $_POST['pi'];
+	$jd = $_POST['jd'];
+	$mandat = $_POST['mandat'];
+	$cc = $_POST['cc'];
+$url = "https://www.cartegrisefactory.fr/api/getPrice";
+	
 	$ch = curl_init($url);
 
 	curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
@@ -29,11 +48,71 @@ $url = "https://www.cartegrisefactory.fr/api/getPrice";
 	}
 
 	curl_close($ch);
+
+	if ($demande == "1") 
+	{
+		echo "Votre demande de changement de titulaire";
+	}
+	if ($demande == "2") 
+	{
+		echo "Votre demande d'immatriculation de votre véhicule neuf";
+	}
+	if ($demande == "3") 
+	{
+		echo "Votre demande de duplicata";
+	}
+	if ($demande == "4") 
+	{
+		echo "Votre demande de changement d'addresse";
+	}
+
+	if ($demande == "5") 
+	{
+		echo "Votre demande de mofication de changement d'état matrimonial";
+	}
   ?>
 
-<p>Le montant de votre carte grise sera de <?php echo $prixCg-29.90; ?></p>
+<form action="#" method="post">
 
+<p>Le montant de votre carte grise sera de <?php echo $prixCg; ?></p>
 
+Commencer la démarches :
+
+<p><label  for="files"> Certificat Immatriculation : (PDF) 
+    <input type="file" name="ci"></label></p>
+
+<?php if ($demande != (3 || 4)){ ?>
+<P><label for="files"> Déclaration de cession : (PDF) </label>
+    <input type="file" name="dc"></P>
+<?php } ?>
+
+<?php if ($demande != (2)) { ?>
+<P><label for="files"> Carte Grise Recto: </label></P>
+    <input type="file" name="cgr">
+
+<P><label for="files"> Carte Grise Verso: </label></P>
+    <input type="file" name="cgv">
+    <?php } ?>
+
+<P><label for="files"> Pièce d'identité : </label></P>
+    <input type="file" name="pi">
+
+<P><label for="files"> Justificatif de domicile : </label></P>
+    <input type="file" name="jd">
+
+<P><label for="files"> Mandat: </label></P>
+    <input type="file" name="mandat">
+
+<?php if ($demande == (2)){ ?>
+<P><label for="files"> Certificat de conformité : (PDF) </label>
+    <input type="file" name="cc"></P>
+<?php } ?>
+
+ <p>Valider<input type="submit" value="OK"></p>
+
+ </form>
+
+ <?php echo $jd; ?>
 
 
 </body>

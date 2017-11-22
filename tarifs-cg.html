@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Certificat d'immatriculation</title>
+	<title>Immat'Pro</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed" rel="stylesheet"> 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -11,7 +12,7 @@
 <form action="api.php" method="post">
 
 
- <p>Votre demande : <select name="demande" value="demande"><option value=null>Choix de la demande</option><option value=1>Changement propriétaire véhicule d'occasion</option><option value=2>Immatriculation d'un véhicule neuf</option>
+ <p>Votre demande : <select name="demande" value="1"><option value=null>Choix de la demande</option><option value=1>Changement propriétaire véhicule d'occasion</option><option value=2>Immatriculation d'un véhicule neuf</option>
  <option value=3>Demande de duplicata</option>
  <option value=4>Changement de domicile</option>
  <option value=5>Changement d'état matrimonial</option></p>
@@ -34,7 +35,7 @@
  </select>
 
 
- <p>Département du domicile (00) : <input type="text" name="departement" value=""/></p>
+ <p>Département du domicile : <input type="text" name="departement" value=""/></p>
  
 <p>Modele du véhicule : <select name="modele" value="modele">
 <option value="">Choisissez une marque</option>
@@ -52,14 +53,14 @@
 
  <p>CV : <input type="text" name="cv" value=""/></p>
  <p>Immatriculation : <input type="text" name="immatriculation" value=""/></p>
- <p>Date de mise en circulation (00-00-0000): <input type="text" name="circulation"/></p>
- <p>Co2 (facultatif) : <input type="text" name="co2" value=""/></p>
- <p>poids (facultatif): <input type="text" name="ptac" value=""/></p>
+ <p>Date de mise en circulation : <input type="text" name="circulation"/></p>
+ <p>Co2 : <input type="text" name="co2" value=""/></p>
+ <p>poids : <input type="text" name="ptac" value=""/></p>
  <p>Valider<input type="submit" value="OK"></p>
 </form>
 
-</p></p></p></form>
 
+</p></p></p></form>
 
 
 </body></html>
