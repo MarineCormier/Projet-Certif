@@ -8,12 +8,155 @@
 </head>
 <body>
 
+<?php 
+
+
+class Vehicule {
+	private $_id;
+	private $_type;
+	private $_modele;
+	private $_energie;
+	private $_cv;
+	private $_immatriculation;
+	private $_circulation;
+	private $_co2;
+	private $_ptac;
+
+
+	public function __construct($array){
+		$this->hydrate($array);
+	}
+
+	public function hydrate(array $donnees)
+	{
+
+	  foreach ($donnees as $key => $value)
+
+	  {
+	    $method = 'set_'.lcfirst($key);
+
+		if (method_exists($this, $method))
+
+	    {
+	    	$this->$method($value);
+	    } 
+
+	  }
+	}
+	public function get_id(){
+		return $this->_id;
+	}
+	public function set_id($_id){
+		$this->_id = $_id;
+	}
+	public function get_type(){
+		return $this->_type;
+	}
+	public function set_type($_type){
+		$this->_type = $_type;
+	}
+	public function get_modele(){
+		return $this->_modele;
+	}
+	public function set_modele($_modele){
+		$this->_modele = $_modele;
+	}
+	public function get_energie(){
+		return $this->_energie;
+	}
+	public function set_energie($_energie){
+		$this->_energie = $_energie;
+	}
+	public function get_cv(){
+		return $this->_cv;
+	}
+	public function set_cv($_cv){
+		$this->_cv = $_cv;
+	}
+	public function get_immatriculation(){
+		return $this->_immatriculation;
+	}
+	public function set_immatriculation($_immatriculation){
+		$this->_immatriculation = $_immatriculation;
+	}
+	public function get_circulation(){
+		return $this->_circulation;
+	}
+	public function set_circulation($_circulation){
+		$this->_circulation = $_circulation;
+	}
+	public function get_co2(){
+		return $this->_co2;
+	}
+	public function set_co2($_co2){
+		$this->_co2 = $_co2;
+	}
+	public function get_ptac(){
+		return $this->_ptac;
+	}
+	public function set_ptac($_ptac){
+		$this->_ptac = $_ptac;
+	}
+}
+?>
+
+
 <?php
-$db_dsn = "mysql:dbname=immatpro;host=localhost";
-$db_user = "root";
-$db_password = "facesimplon";
-$vehicules = new PDO($db_dsn, $db_user, $db_password);
-	
+
+class VehiculeManager
+{
+  private $_db;
+  public function __construct($db)
+  {
+    $this->setDb($db);
+  }
+  public function add(Vehicule $vehicule)
+
+  {
+
+    $q = $this->_db->prepare("INSERT INTO vehicules(type, modele, energie, cv, immatriculation, circulation, co2, ptac) VALUES (:type, :modele, :energie, :cv, :immatriculation, :circulation, :co2, :ptac)");
+
+    $q->bindParam(':type', $vehicule->get_type());
+    $q->bindParam(':modele', $vehicule->get_modele());
+    $q->bindParam(':energie', $vehicule->get_energie());
+    $q->bindParam(':cv', $vehicule->get_cv());
+    $q->bindParam(':immatriculation', $vehicule->get_immatriculation());
+    $q->bindParam(':circulation', $vehicule->get_circulation());
+    $q->bindParam(':co2', $vehicule->get_co2());
+    $q->bindParam(':ptac', $vehicule->get_ptac());
+
+
+    $q->execute();
+
+  }
+	public function setDb(PDO $db)
+	{
+		$this->_db = $db;
+	}
+};
+
+$vehicule = new Vehicule([
+  'type' => $_POST['type'],
+  'modele' => $_POST['modele'],
+  'energie' => $_POST['energie'],
+  'cv' => $_POST['cv'],
+  'immatriculation' => $_POST['immatriculation'],
+  'circulation' => $_POST['circulation'],
+  'co2' => $_POST['co2'],
+  'ptac' => $_POST['ptac']
+]);
+error_log ($vehicule->get_type());
+
+$db = new PDO('mysql:host=localhost;dbname=immatpro', 'root', 'facesimplon');
+$manager = new VehiculeManager($db);
+    
+$manager->add($vehicule);
+
+?>
+
+
+<?php
+
 	$demande = $_POST['demande'];
 	$type = $_POST['type'];
 	$departement = $_POST['departement'];
@@ -24,20 +167,8 @@ $vehicules = new PDO($db_dsn, $db_user, $db_password);
 	$circulation = $_POST['circulation'];
 	$co2 = $_POST['co2'];
 	$ptac = $_POST['ptac'];
-	$ci = $_POST['ci'];
-	$dc = $_POST['dc'];
-	$cgr = $_POST['cgr'];
-	$cgv = $_POST['cgv'];
-	$pi = $_POST['pi'];
-	$jd = $_POST['jd'];
-	$mandat = $_POST['mandat'];
-	$cc = $_POST['cc'];
 
-$vehicules->exec("INSERT INTO vehicules(type, modele, energie, cv, immatriculation, circulation, co2, ptac) VALUES ('$type', '$modele', '$energie', '$cv', '$immatriculation', '$circulation', '$co2', '$ptac')");
 
-unset($vehicules);
-?>
-<?php
 
 $url = "https://www.cartegrisefactory.fr/api/getPrice";
 	
@@ -123,7 +254,6 @@ Commencer la démarches :
 
  </form>
 
- <?php echo $jd; ?>
 
 
 

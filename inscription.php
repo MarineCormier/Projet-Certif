@@ -8,8 +8,19 @@
 </head>
 <body>
 
-<p>Merci pour votre envoi, pour cloturer votre démarche, veuillez remplir le formulaire d'inscription :</p>
+<p>Deja Client ? :</p>
 
+<form action="connexion.php" method="post">
+<h2> Se connecter :</h2>
+
+<p>E-mail : <input type="email" name="email" value="" required/></p>
+
+<p>Mot de Passe : <input type="password" name="mdp" value="" minlength="8" required/></p>
+
+<p>Connexion<input type="submit" value="OK"></p>
+</form>
+
+<p>Merci pour votre envoi, pour cloturer votre démarche, veuillez remplir le formulaire d'inscription :</p>
 
 
 <form action="client.php" method="post">
