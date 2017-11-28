@@ -7,29 +7,38 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<?php
+
+if ($_POST['mdp'] == $_POST['mdp2']) 
+	{
+		echo "Votre demande de changement de titulaire";
+	}
+
+?>
+
 
 <?php
-$prenom = $_POST['prenom'];
-print("<center>Bonjour $prenom </center>");
-
-try
-{
-$bdd = new PDO('mysql:host=localhost;dbname=immatpro', 'root', 'facesimplon');
-}
-catch(Exception $e)
-{
-die('Erreur : '.$e->getMessage());
-}
+$db_dsn = "mysql:dbname=immatpro;host=localhost";
+$db_user = "root";
+$db_password = "facesimplon";
+$connexion = new PDO($db_dsn, $db_user, $db_password);
 
 
-$req = $bdd->prepare('INSERT INTO client(prenom) VALUES(:prenom)');
-$req->execute(array(
-':prenom' => $_POST['prenom']
-));
 
-echo 'Prénom enregistré !';
+	$nom = $_POST['nom'];
+	$prenom = $_POST['prenom'];
+	$adresse = $_POST['adresse'];
+	$cdp = $_POST['cdp'];
+	$ville = $_POST['ville'];
+	$email = $_POST['email'];
+	$tel = $_POST['tel'];
+	$mdp = $_POST['mdp'];
 
 
+
+$connexion->exec("INSERT INTO client(nom, prenom, adresse, ville, code_postal, email, tel, mdp) VALUES ('$nom', '$prenom', '$adresse', '$ville', '$cdp', '$email', '$tel', '$mdp')");
+
+unset($connexion);
 ?>
 
 

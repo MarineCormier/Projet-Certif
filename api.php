@@ -9,6 +9,10 @@
 <body>
 
 <?php
+$db_dsn = "mysql:dbname=immatpro;host=localhost";
+$db_user = "root";
+$db_password = "facesimplon";
+$vehicules = new PDO($db_dsn, $db_user, $db_password);
 	
 	$demande = $_POST['demande'];
 	$type = $_POST['type'];
@@ -29,6 +33,12 @@
 	$mandat = $_POST['mandat'];
 	$cc = $_POST['cc'];
 
+$vehicules->exec("INSERT INTO vehicules(type, modele, energie, cv, immatriculation, circulation, co2, ptac) VALUES ('$type', '$modele', '$energie', '$cv', '$immatriculation', '$circulation', '$co2', '$ptac')");
+
+unset($vehicules);
+?>
+<?php
+
 $url = "https://www.cartegrisefactory.fr/api/getPrice";
 	
 	$ch = curl_init($url);
@@ -39,7 +49,7 @@ $url = "https://www.cartegrisefactory.fr/api/getPrice";
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, "demande=".$_POST['demande']."&type=".$_POST['type']."&departement=".$_POST['departement']."&modele=".$_POST['modele']."&energie=".$_POST['energie']."&cv=".$_POST['cv']."&immatriculation=".$_POST['immatriculation']."&circulation=".$_POST['circulation']."&co2=".$_POST['co2']."&ptac=".$_POST['ptac']);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, "demande=".$demande."&type=".$type."&departement=".$departement."&modele=".$modele."&energie=".$energie."&cv=".$cv."&immatriculation=".$immatriculation."&circulation=".$circulation."&co2=".$co2."&ptac=".$ptac);
 
 
 	$prixCg = curl_exec($ch);
