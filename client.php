@@ -56,17 +56,6 @@ class Clients {
 
 	  }
 	}
-/*
-  public function id() { return $this->_id; }
-  public function nom() { return $this->_nom; }
-  public function prenom() { return $this->_prenom; }
-  public function adresse() { return $this->_adresse; }
-  public function ville() { return $this->_ville; }
-  public function cdp() { return $this->_cdp; }
-  public function email() { return $this->_email; }
-  public function tel() { return $this->_tel; }
-  public function mdp() { return $this->_mdp; }
-*/
 
 	public function get_id(){
 		return $this->_id;
@@ -178,14 +167,6 @@ $manager = new ClientsManager($db);
 $manager->add($clients);
 
 ?>
-
-<h2> Se connecter :</h2>
-
-<p>E-mail : <input type="email" name="email" value="" required/></p>
-
-<p>Mot de Passe : <input type="password" name="mdp" value="" minlength="8" required/></p>
-
-<p>Inscription<input type="submit" value="OK"></p>
 
 
 </body></html>

@@ -9,7 +9,107 @@
 <body>
 
 <?php 
+class Demande {
+	private $_id;
+	private $_libele;
+	private $_datedemande;
 
+	public function __construct($array){
+		$this->hydrate($array);
+	}
+
+	public function hydrate(array $donnees)
+	{
+
+	  foreach ($donnees as $key => $value)
+
+	  {
+	    $method = 'set_'.lcfirst($key);
+
+		if (method_exists($this, $method))
+
+	    {
+	    	$this->$method($value);
+	    } 
+
+	  }
+	}
+
+
+
+	public function get_id(){
+		return $this->_id;
+	}
+
+	public function set_id($_id){
+		$this->_id = $_id;
+	}
+
+	public function get_libele(){
+		return $this->_libele;
+	}
+
+	public function set_libele($_libele){
+		$this->_libele = $_libele;
+	}
+
+	public function get_datedemande(){
+		return $this->_datedemande;
+	}
+
+	public function set_datedemande($_datedemande){
+		$this->_datedemande = $_datedemande;
+	}
+}
+
+?>
+
+<?php
+
+$date = date("Y-m-d");
+echo $date;
+
+class DemandeManager
+{
+  private $_db;
+  public function __construct($db)
+  {
+    $this->setDb($db);
+  }
+  public function add(Demande $demande)
+
+  {
+
+    $q = $this->_db->prepare("INSERT INTO demande(libele, datedemande) VALUES (:libele, :datedemande)");
+
+    $q->bindParam(':libele', $demande->get_libele());
+    $q->bindParam(':datedemande', $demande->get_datedemande());
+
+    $q->execute();
+
+  }
+	public function setDb(PDO $db)
+	{
+		$this->_db = $db;
+	}
+};
+
+$demande = new Demande([
+  'libele' => $_POST['demande'],
+  'datedemande' => $date,
+]);
+
+
+$db2 = new PDO('mysql:host=localhost;dbname=immatpro', 'root', 'facesimplon');
+$manager2 = new DemandeManager($db2);
+    
+$manager2->add($demande);
+
+?>
+
+
+
+<?php
 
 class Vehicule {
 	private $_id;
@@ -114,19 +214,19 @@ class VehiculeManager
 
   {
 
-    $q = $this->_db->prepare("INSERT INTO vehicules(type, modele, energie, cv, immatriculation, circulation, co2, ptac) VALUES (:type, :modele, :energie, :cv, :immatriculation, :circulation, :co2, :ptac)");
+    $r = $this->_db->prepare("INSERT INTO vehicules(type, modele, energie, cv, immatriculation, circulation, co2, ptac) VALUES (:type, :modele, :energie, :cv, :immatriculation, :circulation, :co2, :ptac)");
 
-    $q->bindParam(':type', $vehicule->get_type());
-    $q->bindParam(':modele', $vehicule->get_modele());
-    $q->bindParam(':energie', $vehicule->get_energie());
-    $q->bindParam(':cv', $vehicule->get_cv());
-    $q->bindParam(':immatriculation', $vehicule->get_immatriculation());
-    $q->bindParam(':circulation', $vehicule->get_circulation());
-    $q->bindParam(':co2', $vehicule->get_co2());
-    $q->bindParam(':ptac', $vehicule->get_ptac());
+    $r->bindParam(':type', $vehicule->get_type());
+    $r->bindParam(':modele', $vehicule->get_modele());
+    $r->bindParam(':energie', $vehicule->get_energie());
+    $r->bindParam(':cv', $vehicule->get_cv());
+    $r->bindParam(':immatriculation', $vehicule->get_immatriculation());
+    $r->bindParam(':circulation', $vehicule->get_circulation());
+    $r->bindParam(':co2', $vehicule->get_co2());
+    $r->bindParam(':ptac', $vehicule->get_ptac());
 
 
-    $q->execute();
+    $r->execute();
 
   }
 	public function setDb(PDO $db)

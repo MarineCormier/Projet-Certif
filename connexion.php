@@ -11,8 +11,12 @@
 
 <?php 
 
+$email = $_POST['email'];
+$mdp = $_POST['mdp'];
+
+
 $bdd = new PDO('mysql:host=localhost;dbname=immatpro', 'root', 'facesimplon');
-$req = $bdd->prepare('SELECT name FROM client WHERE email = :email AND mdp = :mdp');
+$req = $bdd->prepare('SELECT nom FROM client WHERE email = :email AND mdp = :mdp');
 $req->execute(array(
     'email' => $email,
     'mdp' => $mdp));
