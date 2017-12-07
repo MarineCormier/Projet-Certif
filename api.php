@@ -50,8 +50,10 @@ class Demande {
 	}
 
 	public function set_libele($_libele){
+
 		$this->_libele = $_libele;
 	}
+
 
 	public function get_datedemande(){
 		return $this->_datedemande;
@@ -245,7 +247,7 @@ $vehicule = new Vehicule([
   'co2' => $_POST['co2'],
   'ptac' => $_POST['ptac']
 ]);
-error_log ($vehicule->get_type());
+
 
 $db = new PDO('mysql:host=localhost;dbname=immatpro', 'root', 'facesimplon');
 $manager = new VehiculeManager($db);
@@ -291,6 +293,18 @@ $url = "https://www.cartegrisefactory.fr/api/getPrice";
 
 	curl_close($ch);
 
+$verif_demande = is_numeric($demande);
+$verif_type = is_numeric($type);
+$verif_depart = is_numeric($departement);
+$verif_modele = is_string($modele);
+$verif_energie = is_string($energie);
+$verif_cv = is_numeric($cv);
+$verif_immat = is_string($immatriculation);
+$verif_circul = is_string($circulation);
+$verif_co2 = is_numeric($co2);
+$verif_ptac = is_numeric($ptac);
+
+if($verif_demande && $verif_type && $verif_ptac && $verif_co2 && $verif_circul && $verif_immat && $verif_cv && $verif_energie && $verif_modele && $verif_depart){
 	if ($demande == "1") 
 	{
 		echo "Votre demande de changement de titulaire";
@@ -312,47 +326,21 @@ $url = "https://www.cartegrisefactory.fr/api/getPrice";
 	{
 		echo "Votre demande de mofication de changement d'état matrimonial";
 	}
+	include 'untitled.html';
+}
+else {
+	echo $ptac;
+	echo "VILAIN PAS BEAU";
+
+}
+
+
+
+	
+
   ?>
 
-<form action="inscription.php" method="post">
 
-<p>Le montant de votre carte grise sera de <?php echo $prixCg; ?></p>
-
-Commencer la démarches :
-
-<p><label  for="files" > Certificat Immatriculation : (PDF) 
-    <input type="file" name="ci" required></label></p>
-
-<?php if ($demande != (3 || 4)){ ?>
-<P><label for="files"> Déclaration de cession : (PDF) </label>
-    <input type="file" name="dc" required></P>
-<?php } ?>
-
-<?php if ($demande != (2)) { ?>
-<P><label for="files"> Carte Grise Recto: </label></P>
-    <input type="file" name="cgr" required>
-
-<P><label for="files"> Carte Grise Verso: </label></P>
-    <input type="file" name="cgv" required>
-    <?php } ?>
-
-<P><label for="files"> Pièce d'identité : </label></P>
-    <input type="file" name="pi" required>
-
-<P><label for="files"> Justificatif de domicile : </label></P>
-    <input type="file" name="jd" required>
-
-<P><label for="files"> Mandat: </label></P>
-    <input type="file" name="mandat" required>
-
-<?php if ($demande == (2)){ ?>
-<P><label for="files"> Certificat de conformité : (PDF) </label>
-    <input type="file" name="cc" required></P>
-<?php } ?>
-
- <p>Valider<input type="submit" value="OK"></p>
-
- </form>
 
 
 
