@@ -257,7 +257,10 @@ $manager->add($vehicule);
 ?>
 
 
+
 <?php
+
+session_start();
 
 	$demande = $_POST['demande'];
 	$type = $_POST['type'];
@@ -297,14 +300,36 @@ $verif_demande = is_numeric($demande);
 $verif_type = is_numeric($type);
 $verif_depart = is_numeric($departement);
 $verif_modele = is_string($modele);
-$verif_energie = is_string($energie);
+$verif_energie = is_numeric($energie);
 $verif_cv = is_numeric($cv);
 $verif_immat = is_string($immatriculation);
 $verif_circul = is_string($circulation);
 $verif_co2 = is_numeric($co2);
 $verif_ptac = is_numeric($ptac);
 
-if($verif_demande && $verif_type && $verif_ptac && $verif_co2 && $verif_circul && $verif_immat && $verif_cv && $verif_energie && $verif_modele && $verif_depart){
+$regex_demande = preg_match("/^[0-5]{1}$/", $demande);
+$regex_depart = preg_match('/^[0-9]{2,3}$/',$departement);
+$regex_type = preg_match("/^[0-9]{1,2}$/", $type);
+$regex_modele = preg_match("/^[A-Z]{1,50}$/", $modele);
+$regex_energie = preg_match("/^[0-9]{1,6}$/", $energie);
+$regex_cv = preg_match("/^[0-9]{1,2}$/", $cv);
+$regex_immat = preg_match("/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/", $immatriculation);
+$regex_circul = preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/', $circulation);
+$regex_co2 = preg_match('/^[0-9]{2,3}$/', $co2);
+$regex_ptac = preg_match('/^[0-9]{3,4}$/', $ptac);
+
+/* echo ($regex_demande);
+echo ($regex_depart);
+echo ($regex_type);
+echo ($regex_modele);
+echo ($regex_energie);
+echo ($regex_cv);
+echo ($regex_immat);
+echo ($regex_circul);
+echo ($regex_co2);
+echo ($regex_ptac);*/
+
+if($verif_demande && $verif_type && $verif_ptac && $verif_co2 && $verif_circul && $verif_immat && $verif_cv && $verif_energie && $verif_modele && $verif_depart && $regex_depart == 1 && $regex_demande == 1 && $regex_depart == 1 && $regex_type == 1 && $regex_modele == 1 && $regex_energie == 1 && $regex_cv == 1 && $regex_immat == 1 && $regex_circul == 1 && $regex_co2 == 1 && $regex_ptac == 1){
 	if ($demande == "1") 
 	{
 		echo "Votre demande de changement de titulaire";
@@ -329,8 +354,8 @@ if($verif_demande && $verif_type && $verif_ptac && $verif_co2 && $verif_circul &
 	include 'untitled.html';
 }
 else {
-	echo $ptac;
-	echo "VILAIN PAS BEAU";
+	header('Location: tarifs-cg.html');
+
 
 }
 
