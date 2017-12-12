@@ -32,10 +32,7 @@
  </select>
 
 
- <p>Département du domicile : 
-
-<select type="number" name="departement" value="" required/>
-<option value="00">(00) Hors France</option>
+ <p>Département du domicile : <select type="number" name="departement" value="" required/>
 <option value="01">(01) Ain </option>
 <option value="02">(02) Aisne </option>
 <option value="03">(03) Allier </option>
@@ -154,9 +151,9 @@
  </select>
 
 
- <p>CV : <input type="number" name="cv" value="" required/></p>
- <p>Immatriculation : <input type="text" name="immatriculation" value="" required/></p>
- <p>Date de mise en circulation : <input type="date" name="circulation" value="jj-mm-aaaa" required/></p>
+ <p>CV (De 0 à 14): <input type="number" name="cv" value="" required/></p>
+ <p>Immatriculation (ex : CA-758-HT): <input type="text" name="immatriculation" value="" required/></p>
+ <p>Date de mise en circulation (Format 07/12/2012): <input type="date" name="circulation" value="jj-mm-aaaa" required/></p>
  <p>Co2 : <input type="number" name="co2" value=""/></p>
  <p>poids : <input type="number" name="ptac" value="0" required/></p>
  <p>Valider<input type="submit" value="OK"></p>
@@ -164,7 +161,6 @@
 </form>
 
 </p></p></p></form>
-
 
 </body></html>
 

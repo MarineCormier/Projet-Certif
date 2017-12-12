@@ -260,8 +260,6 @@ $manager->add($vehicule);
 
 <?php
 
-session_start();
-
 	$demande = $_POST['demande'];
 	$type = $_POST['type'];
 	$departement = $_POST['departement'];
@@ -354,14 +352,9 @@ if($verif_demande && $verif_type && $verif_ptac && $verif_co2 && $verif_circul &
 	include 'untitled.html';
 }
 else {
-	header('Location: tarifs-cg.html');
-
-
-}
-
-
-
 	
+	header('Location: tarifs-cg.html');
+}
 
   ?>
 
