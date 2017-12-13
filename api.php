@@ -270,7 +270,7 @@ $manager->add($vehicule);
 	$circulation = $_POST['circulation'];
 	$co2 = $_POST['co2'];
 	$ptac = $_POST['ptac'];
-
+	$fraisdedossier = 29.90;
 
 
 $url = "https://www.cartegrisefactory.fr/api/getPrice";
@@ -286,10 +286,9 @@ $url = "https://www.cartegrisefactory.fr/api/getPrice";
 	curl_setopt($ch, CURLOPT_POSTFIELDS, "demande=".$demande."&type=".$type."&departement=".$departement."&modele=".$modele."&energie=".$energie."&cv=".$cv."&immatriculation=".$immatriculation."&circulation=".$circulation."&co2=".$co2."&ptac=".$ptac);
 
 
-	$prixCg = curl_exec($ch);
+	$prixCg = curl_exec($ch)-($fraisdedossier);
 
 	if(curl_errno($ch)==28) { 
-		//votre action en cas de timeout
 	}
 
 	curl_close($ch);
