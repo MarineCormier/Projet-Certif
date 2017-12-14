@@ -13,14 +13,14 @@ class VehiculeManager
 
     $r = $this->_db->prepare("INSERT INTO vehicules(type, modele, energie, cv, immatriculation, circulation, co2, ptac) VALUES (:type, :modele, :energie, :cv, :immatriculation, :circulation, :co2, :ptac)");
 
-    $r->bindParam(':type', $vehicule->get_type());
-    $r->bindParam(':modele', $vehicule->get_modele());
-    $r->bindParam(':energie', $vehicule->get_energie());
-    $r->bindParam(':cv', $vehicule->get_cv());
-    $r->bindParam(':immatriculation', $vehicule->get_immatriculation());
-    $r->bindParam(':circulation', $vehicule->get_circulation());
-    $r->bindParam(':co2', $vehicule->get_co2());
-    $r->bindParam(':ptac', $vehicule->get_ptac());
+    $r->bindValue(':type', $vehicule->get_type());
+    $r->bindValue(':modele', $vehicule->get_modele());
+    $r->bindValue(':energie', $vehicule->get_energie());
+    $r->bindValue(':cv', $vehicule->get_cv());
+    $r->bindValue(':immatriculation', $vehicule->get_immatriculation());
+    $r->bindValue(':circulation', $vehicule->get_circulation());
+    $r->bindValue(':co2', $vehicule->get_co2());
+    $r->bindValue(':ptac', $vehicule->get_ptac());
 
 
     $r->execute();

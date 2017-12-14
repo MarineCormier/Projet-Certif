@@ -12,9 +12,8 @@ class DemandeManager
 
     $q = $this->_db->prepare("INSERT INTO demande(libele, datedemande) VALUES (:libele, :datedemande)");
 
-    $q->bindParam(':libele', $demande->get_libele());
-    $q->bindParam(':datedemande', $demande->get_datedemande());
-
+    $q->bindValue(':libele', $demande->get_libele());
+    $q->bindValue(':datedemande', $demande->get_datedemande());
 
     $q->execute();
 

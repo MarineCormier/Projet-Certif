@@ -55,10 +55,6 @@ $manager->add($vehicule);
 <?php
 
 	
-
-
-
-	
 	$ch = curl_init(API_CG_URL);
 
 	curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
@@ -122,6 +118,7 @@ $manager->add($vehicule);
 	
 // 	header('Location: tarifs-cg.php');
 // }
+
 
   ?>
 
