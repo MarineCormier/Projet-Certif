@@ -8,6 +8,10 @@
 </head>
 <body>
 
+
+
+
+
 <p>Deja Client ? :</p>
 
 <form action="connexion.php" method="post">

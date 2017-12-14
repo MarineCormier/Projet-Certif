@@ -159,7 +159,6 @@ $clients = new Clients([
   'tel' => $_POST['tel'],
   'mdp' => $_POST['mdp']
 ]);
-error_log('toto');
 
 $db = new PDO('mysql:host=localhost;dbname=immatpro', 'root', 'facesimplon');
 $manager = new ClientsManager($db);
