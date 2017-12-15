@@ -88,7 +88,7 @@ $manager->add($vehicule);
 	}
 
 	curl_close($ch);
-
+	error_log ($errors);
 
 // if($verif_demande && $verif_type && $verif_ptac && $verif_co2 && $verif_circul && $verif_immat && $verif_cv && $verif_energie && $verif_modele && $verif_depart && $regex_depart == 1 && $regex_demande == 1 && $regex_depart == 1 && $regex_type == 1 && $regex_modele == 1 && $regex_energie == 1 && $regex_cv == 1 && $regex_immat == 1 && $regex_circul == 1 && $regex_co2 == 1 && $regex_ptac == 1){
 // 	if ($demande == "1") 
