@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Vehicule {
 	private $_id;
 	private $_type;
@@ -10,6 +12,7 @@ class Vehicule {
 	private $_circulation;
 	private $_co2;
 	private $_ptac;
+	private $errors;
 
 
 	public function __construct($array){
@@ -64,6 +67,7 @@ class Vehicule {
 	public function set_modele($modele){
 		if(is_string($modele) && preg_match("/^[A-Z]{1,50}$/", $modele)) {
 			$this->_modele = $modele;
+
 		}
 		else {
 			$this->errors[]="Invalid modele defined on vehicule";
@@ -108,6 +112,7 @@ class Vehicule {
 			$this->errors[]="Invalid immatriculation on vehicule";
 		}
 		return $this;
+		error_log($errors);
 }
 
 	public function get_circulation(){
@@ -133,7 +138,7 @@ class Vehicule {
 	}
 
 	else { 
-		$this->errors[]="Invalid ptac on vehicule";
+		$this->errors[]="Invalid co2 on vehicule";
 }
 return $this;
 
@@ -155,9 +160,27 @@ return $this;
 
 	public function isValid(){
 		return count($this->errors)==0;
+
 	}
 	public function getErrors(){
 		return $this->errors;
 	}
 
-}
+	public function removeErrors()
+	{
+		return $this->errors;
+
+	}
+	public function setErrors(PDO $array){
+		$this->errors = $errors;
+	}
+};
+
+
+
+
+
+
+
+
+

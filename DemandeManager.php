@@ -10,12 +10,12 @@ class DemandeManager
 
   {
 
-    $q = $this->_db->prepare("INSERT INTO demande(libele, datedemande) VALUES (:libele, :datedemande)");
+    $q = $this->_db->prepare("INSERT INTO demande(libele, datedemande, departement) VALUES (:libele, :datedemande, :departement)");
 
     $q->bindValue(':libele', $demande->get_libele());
     $q->bindValue(':datedemande', $demande->get_datedemande());
-
-    $q->execute();
+    $q->bindValue(':departement', $demande->get_departement());
+     $q->execute();
 
   }
 	public function setDb(PDO $db)
@@ -23,3 +23,5 @@ class DemandeManager
 		$this->_db = $db;
 	}
 };
+
+  

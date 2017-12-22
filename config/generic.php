@@ -7,4 +7,5 @@ $vehiculeTypes=["VP", "CTTE", "CL", "MTL, MTT1, MTT2, MTTE, MOTO", "TM", "CYCL",
 $db_server='';
 $db_name='';
 $db_user='';
-$db_pwd=''
+$db_pwd='';
+

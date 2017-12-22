@@ -24,10 +24,11 @@ class VehiculeManager
 
 
     $r->execute();
-
   }
 	public function setDb(PDO $db)
 	{
 		$this->_db = $db;
 	}
 };
+
+
